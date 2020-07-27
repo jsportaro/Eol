@@ -6,7 +6,12 @@ namespace Eol.Runner
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var eater = new Eater(new Gpio());
+
+            while (true)
+            {
+                eater.SetByte(0b1010_1010, 1);
+            }
         }
     }
 }
