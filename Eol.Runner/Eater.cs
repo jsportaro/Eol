@@ -48,6 +48,8 @@ namespace Eol.Runner
 
         public void SetByte(byte b, short address)
         {
+            Console.WriteLine($"Setting value {b}");
+
             gpio.Write(Bit0, IsBitSet(b, 0) ? PinValue.High : PinValue.Low);
             gpio.Write(Bit1, IsBitSet(b, 1) ? PinValue.High : PinValue.Low);
             gpio.Write(Bit2, IsBitSet(b, 2) ? PinValue.High : PinValue.Low);
