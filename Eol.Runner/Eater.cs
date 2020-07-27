@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Device.Gpio;
+using System.Security.Principal;
 using System.Text;
 using System.Threading;
 
@@ -18,6 +19,11 @@ namespace Eol.Runner
         private const int Bit6 = 5;
         private const int Bit7 = 6;
         private const int Set = 26;
+        private const int Addr0 = 15;
+        private const int Addr1 = 18;
+        private const int Addr2 = 23;
+        private const int Addr3 = 24;
+
         private const int SetWrite = 13;
         private const int SetRun = 19;
         
@@ -46,7 +52,7 @@ namespace Eol.Runner
             gpio.OpenPin(Set, PinMode.Output);
         }
 
-        public void SetByte(byte b, short address)
+        public void SetByte(byte b, byte address)
         {
             Console.WriteLine($"Setting value {b}");
 
@@ -58,6 +64,11 @@ namespace Eol.Runner
             gpio.Write(Bit5, IsBitSet(b, 5) ? PinValue.High : PinValue.Low);
             gpio.Write(Bit6, IsBitSet(b, 6) ? PinValue.High : PinValue.Low);
             gpio.Write(Bit7, IsBitSet(b, 7) ? PinValue.High : PinValue.Low);
+
+            gpio.Write(Addr0, IsBitSet(address, 0) ? PinValue.High : PinValue.Low);
+            gpio.Write(Addr1, IsBitSet(address, 1) ? PinValue.High : PinValue.Low);
+            gpio.Write(Addr2, IsBitSet(address, 2) ? PinValue.High : PinValue.Low);
+            gpio.Write(Addr3, IsBitSet(address, 3) ? PinValue.High : PinValue.Low);
 
             gpio.Write(Set, PinValue.High);
             Thread.Sleep(1000);
