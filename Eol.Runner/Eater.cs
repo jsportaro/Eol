@@ -48,18 +48,23 @@ namespace Eol.Runner
 
         public void SetByte(byte b, short address)
         {
-            gpio.Write(Bit0, PinValue.High);
-            gpio.Write(Bit1, PinValue.High);
-            gpio.Write(Bit2, PinValue.High);
-            gpio.Write(Bit3, PinValue.High);
-            gpio.Write(Bit4, PinValue.High);
-            gpio.Write(Bit5, PinValue.High);
-            gpio.Write(Bit6, PinValue.High);
-            gpio.Write(Bit7, PinValue.High);
+            gpio.Write(Bit0, IsBitSet(b, 0) ? PinValue.High : PinValue.Low);
+            gpio.Write(Bit1, IsBitSet(b, 1) ? PinValue.High : PinValue.Low);
+            gpio.Write(Bit2, IsBitSet(b, 2) ? PinValue.High : PinValue.Low);
+            gpio.Write(Bit3, IsBitSet(b, 3) ? PinValue.High : PinValue.Low);
+            gpio.Write(Bit4, IsBitSet(b, 4) ? PinValue.High : PinValue.Low);
+            gpio.Write(Bit5, IsBitSet(b, 5) ? PinValue.High : PinValue.Low);
+            gpio.Write(Bit6, IsBitSet(b, 6) ? PinValue.High : PinValue.Low);
+            gpio.Write(Bit7, IsBitSet(b, 7) ? PinValue.High : PinValue.Low);
 
             gpio.Write(Set, PinValue.High);
             Thread.Sleep(1000);
             gpio.Write(Set, PinValue.Low);
+        }
+
+        bool IsBitSet(byte b, int pos)
+        {
+            return (b & (1 << pos)) != 0;
         }
 
         public void SetMode(EaterMode mode)
