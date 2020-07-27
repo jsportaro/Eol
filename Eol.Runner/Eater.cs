@@ -50,6 +50,11 @@ namespace Eol.Runner
             gpio.OpenPin(Bit6, PinMode.Output);
             gpio.OpenPin(Bit7, PinMode.Output);
             gpio.OpenPin(Set, PinMode.Output);
+
+            gpio.OpenPin(Addr0, PinMode.Output);
+            gpio.OpenPin(Addr1, PinMode.Output);
+            gpio.OpenPin(Addr2, PinMode.Output);
+            gpio.OpenPin(Addr3, PinMode.Output);
         }
 
         public void SetByte(byte b, byte address)
