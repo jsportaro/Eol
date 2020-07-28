@@ -21,8 +21,8 @@ namespace Eol.Runner
         private const int Set = 26;
         private const int Addr0 = 15;
         private const int Addr1 = 18;
-        private const int Addr2 = 23;
-        private const int Addr3 = 24;
+        private const int Addr2 = 24;
+        private const int Addr3 = 25;
 
         private const int SetWrite = 13;
         private const int SetRun = 19;
@@ -59,7 +59,12 @@ namespace Eol.Runner
 
         public void SetByte(byte b, byte address)
         {
-            Console.WriteLine($"Setting value {b}");
+            Console.WriteLine($"Setting value {b} at {address}");
+
+	    gpio.Write(Addr0, PinValue.Low);
+	    gpio.Write(Addr1, PinValue.Low);
+	    gpio.Write(Addr2, PinValue.Low);
+	    gpio.Write(Addr3, PinValue.Low);
 
             gpio.Write(Bit0, IsBitSet(b, 0) ? PinValue.High : PinValue.Low);
             gpio.Write(Bit1, IsBitSet(b, 1) ? PinValue.High : PinValue.Low);
@@ -75,10 +80,11 @@ namespace Eol.Runner
             gpio.Write(Addr2, IsBitSet(address, 2) ? PinValue.High : PinValue.Low);
             gpio.Write(Addr3, IsBitSet(address, 3) ? PinValue.High : PinValue.Low);
 
-            gpio.Write(Set, PinValue.High);
-            Thread.Sleep(1000);
             gpio.Write(Set, PinValue.Low);
-        }
+            gpio.Write(Set, PinValue.High);
+
+            Thread.Sleep(2000);
+	}
 
         bool IsBitSet(byte b, int pos)
         {
