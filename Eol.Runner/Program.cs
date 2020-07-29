@@ -22,19 +22,19 @@ namespace Eol.Runner
                 eater = new Eater(new Gpio());
             }
 
-            var bus = Bus.Factory.CreateUsingAzureServiceBus(sbc =>
-            {
-                sbc.Host("Endpoint=sb://eateronlineservicebus.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=QTRhb/VlxmgJ94QTsxnO83yP/+PLErNtdwb+ro1yuWE=");
-                sbc.ReceiveEndpoint("input-queue", ep =>
-                {
-                    ep.Handler<LoadProgram>(context =>
-                    {
-                        return Console.Out.WriteLineAsync($"Received");
-                    });
-                });
-            });
+            //var bus = Bus.Factory.CreateUsingAzureServiceBus(sbc =>
+            //{
+            //    sbc.Host("Endpoint=sb://eateronlineservicebus.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=QTRhb/VlxmgJ94QTsxnO83yP/+PLErNtdwb+ro1yuWE=");
+            //    sbc.ReceiveEndpoint("input-queue", ep =>
+            //    {
+            //        ep.Handler<LoadProgram>(context =>
+            //        {
+            //            return Console.Out.WriteLineAsync($"Received");
+            //        });
+            //    });
+            //});
 
-            bus.Start();
+            //bus.Start();
 
             //Console.WriteLine("Programming the Eater");
             //eater.SetByte(0b1110_0000, 0b1000);
