@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Eol.Runner": {
+      "commandName": "Project",
+      "commandLineArgs": "testing"
+    }
+  }
+}

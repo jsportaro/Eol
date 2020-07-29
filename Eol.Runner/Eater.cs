@@ -25,7 +25,7 @@ namespace Eol.Runner
         private const int Addr3 = 24;
 
         private const int SetWrite = 13;
-        private const int SetRun = 19;
+        private const int SetRead = 19;
         
         private readonly IGpio gpio;
 
@@ -55,11 +55,14 @@ namespace Eol.Runner
             gpio.OpenPin(Addr1, PinMode.Output);
             gpio.OpenPin(Addr2, PinMode.Output);
             gpio.OpenPin(Addr3, PinMode.Output);
+
+            gpio.OpenPin(SetRead, PinMode.Output);
+            gpio.OpenPin(SetWrite, PinMode.Output);
         }
 
         public void SetByte(byte b, byte address)
         {
-            Console.WriteLine($"Setting value {b}");
+            Console.WriteLine($"Setting value {b} at {address}");
 
             gpio.Write(Bit0, IsBitSet(b, 0) ? PinValue.High : PinValue.Low);
             gpio.Write(Bit1, IsBitSet(b, 1) ? PinValue.High : PinValue.Low);
@@ -75,9 +78,22 @@ namespace Eol.Runner
             gpio.Write(Addr2, IsBitSet(address, 2) ? PinValue.High : PinValue.Low);
             gpio.Write(Addr3, IsBitSet(address, 3) ? PinValue.High : PinValue.Low);
 
-            gpio.Write(Set, PinValue.High);
-            Thread.Sleep(1000);
+            
             gpio.Write(Set, PinValue.Low);
+            Thread.Sleep(1000);
+            gpio.Write(Set, PinValue.High);
+        }
+
+        public void EnterProgramMode()
+        {
+            gpio.Write(SetWrite, PinValue.Low);
+            gpio.Write(SetRead, PinValue.High);
+        }
+
+        public void EnterRunMode()
+        {
+            gpio.Write(SetWrite, PinValue.High);
+            gpio.Write(SetRead, PinValue.Low);
         }
 
         bool IsBitSet(byte b, int pos)
@@ -85,9 +101,5 @@ namespace Eol.Runner
             return (b & (1 << pos)) != 0;
         }
 
-        public void SetMode(EaterMode mode)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
