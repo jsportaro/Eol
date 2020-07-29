@@ -79,9 +79,10 @@ namespace Eol.Runner
             gpio.Write(Addr3, IsBitSet(address, 3) ? PinValue.High : PinValue.Low);
 
             
-            gpio.Write(Set, PinValue.Low);
-            Thread.Sleep(1000);
             gpio.Write(Set, PinValue.High);
+
+            Thread.Sleep(1000);
+            gpio.Write(Set, PinValue.Low);
         }
 
         public void EnterProgramMode()
