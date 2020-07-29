@@ -19,30 +19,39 @@ namespace Eol.Runner
 
         public void LoadAndRun()
         {
+            Console.WriteLine();
             StopClock();
             SetToWrite();
             LoadProgram();
             SetToRead();
             Reset();
             StartClock();
+            Console.WriteLine();
         }
 
         private void StartClock()
         {
+            Console.WriteLine("Stopping Clock");
+
         }
 
         private void Reset()
         {
+            Console.WriteLine("Resetting");
+
         }
 
         private void SetToRead()
         {
+            
+
             eater.EnterProgramMode();
         }
 
         private void LoadProgram()
         {
-            for (byte i = 0; i < 16; i++)
+            Console.WriteLine("Loading program");
+            for (byte i = 0; i < program.Length; i++)
             {
                 eater.SetByte(program[i], i);
             }
@@ -50,11 +59,13 @@ namespace Eol.Runner
 
         private void SetToWrite()
         {
+
             eater.EnterRunMode();
         }
 
         private void StopClock()
         {
+            Console.WriteLine("Starting Clock");
         }
     }
 }

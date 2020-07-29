@@ -72,6 +72,8 @@ namespace Eol.Runner
             {
                 var programmer = new Programmer(eater, prog);
 
+                programmer.LoadAndRun();
+
                 cont = Console.ReadKey().Key.ToString().ToLower() == "y";
             }
         }
