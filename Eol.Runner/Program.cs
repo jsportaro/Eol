@@ -55,16 +55,13 @@ namespace Eol.Runner
             //    eater.SetByte(0b0010_0000, 0b0110);
             //    eater.SetByte(0b0100_0000, 0b1000);
             //    eater.SetByte(0b1000_0000, 0b1001);
+
             var prog = new byte[16];
             prog[0b0000] = 0b0000_0000;
-            prog[0b0001] = 0b0000_0001;
-            prog[0b0010] = 0b0000_0010;
-            prog[0b0011] = 0b0000_0100;
-            prog[0b0100] = 0b0000_1000;
-            prog[0b0101] = 0b0001_0000;
-            prog[0b0110] = 0b0010_0000;
-            prog[0b1000] = 0b0100_0000;
-            prog[0b1001] = 0b1000_0000;
+            prog[0b0001] = 0b0001_1000;
+            prog[0b0010] = 0b1110_0000;
+            prog[0b0011] = 0b1111_0000;
+            prog[0b1000] = 0b0000_1000;
 
             var cont = true;
             cont = Console.ReadKey().Key.ToString().ToLower() == "y";
