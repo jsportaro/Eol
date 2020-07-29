@@ -67,7 +67,7 @@ namespace Eol.Runner
             prog[0b1001] = 0b1000_0000;
 
             var cont = true;
-
+            cont = Console.ReadKey().Key.ToString().ToLower() == "y";
             while (cont)
             {
                 var programmer = new Programmer(eater, prog);
